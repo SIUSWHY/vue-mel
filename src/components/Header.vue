@@ -83,6 +83,7 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   /* margin: 0 auto; */
+  margin: 0px 15px;
   max-width: 1280px;
 }
 .menu_list {
