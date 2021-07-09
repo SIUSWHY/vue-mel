@@ -1,91 +1,29 @@
 <template>
   <div class="cardnews_container_style">
-    <!-- <Cardnews /> -->
     <div class="container-cards">
-      <div class="cards_size">
-        <img src="./img/1.png" alt="pic" />
-        <div class="block_card_style">
-          <div class="content-title">ЭМОЦИИ</div>
-          <div class="content-text">
-            «За одной и той же истерикой могут стоять разные причины». Как
-            научиться управлять эмоциями
-          </div>
-        </div>
-      </div>
-      <div class="cards_size">
-        <img src="./img/1.png" alt="pic" />
-        <div class="block_card_style">
-          <div class="content-title">ЭМОЦИИ</div>
-          <div class="content-text">
-            «За одной и той же истерикой могут стоять разные причины». Как
-            научиться управлять эмоциями
-          </div>
-        </div>
-      </div>
-      <div class="cards_size">
-        <img src="./img/1.png" alt="pic" />
-        <div class="block_card_style">
-          <div class="content-title">ЭМОЦИИ</div>
-          <div class="content-text">
-            «За одной и той же истерикой могут стоять разные причины». Как
-            научиться управлять эмоциями
-          </div>
-        </div>
-      </div>
-      <div class="cards_size">
-        <img src="./img/1.png" alt="pic" />
-        <div class="block_card_style">
-          <div class="content-title">ЭМОЦИИ</div>
-          <div class="content-text">
-            «За одной и той же истерикой могут стоять разные причины». Как
-            научиться управлять эмоциями
-          </div>
-        </div>
-      </div>
-      <div class="cards_size">
-        <img src="./img/1.png" alt="pic" />
-        <div class="block_card_style">
-          <div class="content-title">ЭМОЦИИ</div>
-          <div class="content-text">
-            «За одной и той же истерикой могут стоять разные причины». Как
-            научиться управлять эмоциями
-          </div>
-        </div>
-      </div>
-      <div class="cards_size">
-        <img src="./img/1.png" alt="pic" />
-        <div class="block_card_style">
-          <div class="content-title">ЭМОЦИИ</div>
-          <div class="content-text">
-            «За одной и той же истерикой могут стоять разные причины». Как
-            научиться управлять эмоциями
-          </div>
-        </div>
-      </div>
-      <div class="cards_size">
-        <img src="./img/1.png" alt="pic" />
-        <div class="block_card_style">
-          <div class="content-title">ЭМОЦИИ</div>
-          <div class="content-text">
-            «За одной и той же истерикой могут стоять разные причины». Как
-            научиться управлять эмоциями
-          </div>
-        </div>
-      </div>
+      <Cardnews
+        v-for="news in $store.getters.cards"
+        :key="news.id"
+        :card_news="news"
+      ></Cardnews>
     </div>
   </div>
 </template>
 
 <script>
-// import Cardnews from "./components/Cardnews.vue";
+import { mapGetters } from "vuex";
+import Cardnews from "./Cardnews.vue";
 
 export default {
   name: "Newsgallery",
-  //   props: {
-  //     msg: String,
-  //   },
   components: {
-    // Cardnews,
+    Cardnews,
+  },
+  props: {},
+  computed: {
+    ...mapGetters({
+      cards: "cards",
+    }),
   },
 };
 </script>
@@ -97,27 +35,7 @@ export default {
   max-width: 1240px;
   margin: 0px auto;
 }
-.content-text {
-  font-weight: 600;
-  font-size: 21.5px;
-  text-align: center;
-  color: black;
-}
-.content-title {
-  color: rgb(236, 52, 94);
-  font-weight: 600;
-  font-size: 11px;
-  margin-bottom: 7px;
-  text-align: center;
-}
-.cards_size {
-  width: 280px;
-  margin: 15px;
-  background-color: white;
-}
-.block_card_style {
-  padding: 20px 25px 25px;
-}
+
 .cardnews_container_style {
   background-color: #f2f2f2;
 }
