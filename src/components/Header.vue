@@ -7,6 +7,7 @@
           <ul class="menu_list">
             <li class="active">Тексты</li>
             <li>Рассылки</li>
+            <div class="podcast-btn">Подкасты</div>
           </ul>
         </nav>
       </div>
@@ -18,10 +19,14 @@
             placeholder="  Ищите статью?"
             id=""
           />
+          <font-awesome-icon icon="search" />
           <!-- <font-awesome-icon icon="times-circle" size="2x" /> -->
           <!-- <font-awesome-icon icon="user-secret" /> -->
         </div>
-        <a class="type-list-right-menu" href="">НАПИСАТЬ В БЛОГ</a>
+        <a class="type-list-right-menu" href=""
+          >НАПИСАТЬ В БЛОГ
+          <font-awesome-icon icon="pencil-alt" />
+        </a>
         <button class="si-up_b-style" type="submit">Sing Up</button>
       </div>
     </div>
@@ -39,6 +44,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.podcast-btn {
+  width: 100px;
+  /* text-align: center;
+  background-repeat: no-repeat;
+  background-position: center 51%;
+  background-size: 100px 30px;
+  transition: background-image 0.2s ease-out; */
+  background-image: url("/img/trash/menu-podcast-link.svg");
+}
 .si-up_b-style {
   /* font-size: 13px; */
   font-weight: 600;
@@ -71,7 +85,7 @@ export default {
   border-radius: 20px;
   height: 20px;
   color: #a1a3a3;
-  margin: 20px 10px 0px 0px;
+  margin: 20px 3px 0px 0px;
 }
 .back-g_headr_menu {
   background-color: #212121;
