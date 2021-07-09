@@ -7,6 +7,17 @@
         <div class="content-text">
           {{ card_news.text }}
         </div>
+        <div class="counts_position">
+          <div class="date_style">{{ card_news.newDate }}</div>
+          <div>
+            <div class="view_count_style">
+              <font-awesome-icon icon="heart" /> {{ card_news.viewCount }}
+            </div>
+            <div class="comment_count_style">
+              <font-awesome-icon icon="comment" /> {{ card_news.commentCount }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -29,6 +40,21 @@ export default {
 </script>
 
 <style scoped>
+.comment_count_style {
+  display: inline-block;
+  margin: 0px 10px;
+}
+.view_count_style {
+  margin: 0px 10px;
+  display: inline-block;
+}
+.counts_potion {
+  display: flex;
+}
+.date_style {
+  font: 13px Arial;
+  margin: 0px 0px 10px 170px;
+}
 .size_pic {
   width: 280px;
   height: 220px;
