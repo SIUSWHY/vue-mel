@@ -20,25 +20,42 @@
             id=""
           />
           <font-awesome-icon icon="search" />
-          <!-- <font-awesome-icon icon="times-circle" size="2x" /> -->
-          <!-- <font-awesome-icon icon="user-secret" /> -->
         </div>
         <a class="type-list-right-menu" href=""
           >НАПИСАТЬ В БЛОГ
           <font-awesome-icon icon="pencil-alt" />
         </a>
-        <button class="si-up_b-style" type="submit">Sing Up</button>
+        <button class="si-up_b-style" type="button" @click="showModal">
+          Sing Up
+        </button>
+        <modal v-show="isModalVisible" @close="closeModal" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Modal from "@/components/Registr.vue";
+
 export default {
   name: "Header",
-  // props: {
-  //   msg: String,
-  // },
+  components: {
+    Modal,
+  },
+  data() {
+    return {
+      isModalVisible: false,
+    };
+  },
+  computed: {},
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
+  },
 };
 </script>
 
