@@ -3,6 +3,7 @@
   <transition name="modal-fade">
     <div class="modal-backdrop">
       <div
+        @submit.prevent="sendData"
         class="modal"
         role="dialog"
         aria-labelledby="modalTitle"
@@ -13,29 +14,54 @@
           <div class="bottom-margin-input-lable">
             <div class="b-auth-email__input-label">Имя пользователя</div>
             <div>
-              <input class="g-input__input" type="text" name="username" />
+              <input
+                v-model="username"
+                id="username"
+                class="g-input__input"
+                type="text"
+              />
             </div>
           </div>
           <div class="bottom-margin-input-lable">
             <div class="b-auth-email__input-label">Имя</div>
             <div>
-              <input class="g-input__input" type="text" name="name" />
+              <input
+                v-model="name"
+                id="name"
+                class="g-input__input"
+                type="text"
+              />
             </div>
           </div>
           <div class="bottom-margin-input-lable">
             <div class="b-auth-email__input-label">E-mail</div>
             <div>
-              <input class="g-input__input" type="text" name="email" />
+              <input
+                v-model="email"
+                id="email"
+                class="g-input__input"
+                type="text"
+              />
             </div>
           </div>
           <div class="bottom-margin-input-lable">
             <div class="b-auth-email__input-label">Пароль</div>
             <div>
-              <input class="g-input__input" type="password" name="password" />
+              <input
+                v-model="password"
+                id="passwoed"
+                class="g-input__input"
+                type="password"
+              />
             </div>
           </div>
           <div class="registr-butten-style">
-            <button class="b-auth-email__registration-button" @click="close">
+            <button
+              type="submit"
+              value="Send"
+              class="b-auth-email__registration-button"
+              @click="close"
+            >
               ЗАРЕГИСТРИРОВАТЬСЯ
             </button>
           </div>
@@ -47,14 +73,34 @@
 
 <script>
 export default {
-  name: "Registr",
+  name: "registr",
+  data: function () {
+    return {
+      username: "",
+      name: "",
+      email: "",
+      password: "",
+    };
+  },
   methods: {
+    // sendData() {
+    //   console.log(this.username, this.name, this.email, this.password);
+    // },
     close() {
+      console.log(this.username, this.name, this.email, this.password);
       this.$emit("close");
     },
   },
-  components: {},
 };
+// export default {
+//   name: "Registr",
+//   methods: {
+//     close() {
+//       this.$emit("close");
+//     },
+//   },
+//   components: {},
+// };
 </script>
 
 <style scoped>
