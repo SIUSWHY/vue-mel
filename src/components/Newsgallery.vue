@@ -33,7 +33,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   max-width: 1240px;
-  margin: 0% 7%;
+  /* margin: 0% 7%; */
 }
 
 .cardnews_container_style {
