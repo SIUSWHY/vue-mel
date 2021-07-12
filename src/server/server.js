@@ -4,7 +4,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path = require('path');
-
 const app = express();
 
 app.set('port', 3000);
@@ -20,3 +19,7 @@ mongoose.connect('mongodb://localhost:27017/users', { useNewUrlParser: true })
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
+
+// app.use(app.router);
+// routes.initialize(app);
+// app.use('/users', require('./routes/records'));
