@@ -1,4 +1,3 @@
-
 <template>
   <transition name="modal-fade">
     <div class="modal-backdrop">
@@ -9,36 +8,14 @@
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
       >
-        <div class="registration-butten-position">Регистрация</div>
+        <div class="registration-butten-position">Авторизация</div>
         <div class="g-tab__content">
-          <div class="bottom-margin-input-lable">
-            <div class="b-auth-email__input-label">Имя пользователя</div>
-            <div>
-              <input
-                v-model="username"
-                id="username"
-                class="g-input__input"
-                type="text"
-              />
-            </div>
-          </div>
-          <div class="bottom-margin-input-lable">
-            <div class="b-auth-email__input-label">Имя</div>
-            <div>
-              <input
-                v-model="name"
-                id="name"
-                class="g-input__input"
-                type="text"
-              />
-            </div>
-          </div>
           <div class="bottom-margin-input-lable">
             <div class="b-auth-email__input-label">E-mail</div>
             <div>
               <input
                 v-model="email"
-                id="email"
+                id="email-login"
                 class="g-input__input"
                 type="text"
               />
@@ -49,25 +26,20 @@
             <div>
               <input
                 v-model="password"
-                id="passwoed"
+                id="passwoed-login"
                 class="g-input__input"
                 type="password"
               />
             </div>
-          </div>
-
-          <div class="login-btn_decor" @click="showModal">
-            Уже есть аккаунт? Войти.
-            <login v-show="isModalVisible" @close="closeLogin" />
           </div>
           <div class="registr-butten-style">
             <button
               type="submit"
               value="Send"
               class="b-auth-email__registration-button"
-              @click="close"
+              @click="closelog"
             >
-              ЗАРЕГИСТРИРОВАТЬСЯ
+              АВТОРИЗИРОВАТЬСЯ
             </button>
           </div>
         </div>
@@ -77,60 +49,17 @@
 </template>
 
 <script>
-import Login from "@/components/Login.vue";
-
 export default {
-  name: "registr",
-  data: function () {
-    return {
-      username: "",
-      name: "",
-      email: "",
-      password: "",
-      isModalVisible: false,
-    };
-  },
-  // data() {
-  //   return {
-  //     isModalVisible: false,
-  //   };
-  // },
   methods: {
-    // sendData() {
-    //   console.log(this.username, this.name, this.email, this.password);
-    // },
-    close() {
+    closelog() {
       console.log(this.username, this.name, this.email, this.password);
       this.$emit("close");
     },
-    showModal() {
-      this.isModalVisible = true;
-    },
-    closeLogin() {
-      this.isModalVisible = false;
-    },
-  },
-  components: {
-    Login,
   },
 };
-// export default {
-//   name: "Registr",
-//   methods: {
-//     close() {
-//       this.$emit("close");
-//     },
-//   },
-//   components: {},
-// };
 </script>
 
 <style scoped>
-.login-btn_decor {
-  color: #8453d2;
-  text-decoration: underline;
-  margin-top: 30px;
-}
 .modal {
   background: #ffffff;
   box-shadow: 2px 2px 20px 1px;
@@ -160,7 +89,7 @@ export default {
 .registr-butten-style {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 .b-auth-email__input-label {
   position: relative;
@@ -195,4 +124,3 @@ export default {
   cursor: default;
 }
 </style>
-
