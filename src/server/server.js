@@ -43,7 +43,9 @@ async function run() {
     const port = 3000
 
     app.use(cors())
-    app.use(bodyParser())
+    // app.use(bodyParser.urlencoded());
+    // app.use(bodyParser.json());
+    app.use(express.urlencoded({ extended: true }))
 
     await mongoose.connect('mongodb://localhost:27017/mel', {
         useNewUrlParser: true,
