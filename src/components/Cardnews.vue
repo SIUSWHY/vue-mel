@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="cards_data">
     <div class="cards_size">
       <img class="size_pic" :src="require('@/components/' + card_news.img)" />
       <div class="block_card_style">

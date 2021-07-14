@@ -6,6 +6,7 @@
         :key="news.id"
         :card_news="news"
       ></Cardnews>
+      <Newcards />
     </div>
   </div>
 </template>
@@ -13,11 +14,13 @@
 <script>
 import { mapGetters } from "vuex";
 import Cardnews from "./Cardnews.vue";
+import Newcards from "./Newcards.vue";
 
 export default {
   name: "Newsgallery",
   components: {
     Cardnews,
+    Newcards,
   },
   props: {},
   computed: {

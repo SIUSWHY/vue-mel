@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import Modal from "@/components/Registr.vue";
 
 export default {
@@ -46,6 +47,11 @@ export default {
     return {
       isModalVisible: false,
     };
+  },
+  mounted() {
+    axios
+      .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+      .then((response) => (this.info = response));
   },
   computed: {},
   methods: {

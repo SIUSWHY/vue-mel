@@ -13,19 +13,13 @@
           <div class="bottom-margin-input-lable">
             <div class="b-auth-email__input-label">E-mail</div>
             <div>
-              <input
-                v-model="email"
-                id="email-login"
-                class="g-input__input"
-                type="text"
-              />
+              <input id="email-login" class="g-input__input" type="text" />
             </div>
           </div>
           <div class="bottom-margin-input-lable">
             <div class="b-auth-email__input-label">Пароль</div>
             <div>
               <input
-                v-model="password"
                 id="passwoed-login"
                 class="g-input__input"
                 type="password"
@@ -52,7 +46,7 @@
 export default {
   methods: {
     closelog() {
-      console.log(this.username, this.name, this.email, this.password);
+      console.log(this.email, this.password);
       this.$emit("close");
     },
   },
