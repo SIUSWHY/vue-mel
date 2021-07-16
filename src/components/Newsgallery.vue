@@ -2,34 +2,26 @@
   <div class="cardnews_container_style">
     <div class="container-cards">
       <Cardnews
-        v-for="news in $store.getters.cards"
-        :key="news.id"
-        :card_news="news"
+        v-for="post in $store.state.posts"
+        :key="post.id"
+        :card_news="post"
       ></Cardnews>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
 import Cardnews from "./Cardnews.vue";
-import axios from "axios";
+import store from "./vuex/store";
 
 export default {
   name: "Newsgallery",
+  mounted() {
+    store.dispatch("loadData");
+  },
   components: {
     Cardnews,
-  },
-  props: {},
-  computed: {
-    ...mapGetters({
-      cards: "cards",
-    }),
-  },
-  mounted() {
-    axios
-      .get("http://127.0.0.1:3000/cards")
-      .then((response) => (this.info = response));
   },
 };
 </script>

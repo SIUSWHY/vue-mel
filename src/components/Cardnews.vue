@@ -26,15 +26,12 @@
 <script>
 export default {
   name: "Cardnews",
-  components: {},
-  props: {
-    card_news: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
+  props: ["card_news"],
+
+  updated() {
+    console.log(this.card_news);
   },
+
   computed: {},
 };
 </script>

@@ -1,17 +1,26 @@
-import vue from 'vue'
-import vuex from 'vuex'
-import cards from "@/components/cardata";
+import axios from "axios";
+import Vue from "vue";
+import Vuex from "vuex";
+import { getCards } from "../cards/cards";
+// import cards from "@/components/cardata";
+Vue.use(Vuex);
 
-vue.use(vuex);
-const store = new vuex.Store({
-    state: cards, // spread
-    mutation: {},
-    actions: {},
-    getters: {
-        cards: (state) => state
-    }
+//VueX store
+const store = new Vuex.Store({
+  state: {
+    posts: [],
+  },
+  actions: {
+    async loadData({ commit }) {
+      const { data: cards } = await getCards();
+      commit("getPosts", cards);
+    },
+  },
+  mutations: {
+    getPosts(state, posts) {
+      state.posts = posts;
+    },
+  },
 });
-console.log(store.state);
-
 
 export default store;
