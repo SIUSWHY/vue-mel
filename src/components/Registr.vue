@@ -1,4 +1,3 @@
-
 <template>
   <transition name="modal-fade">
     <div class="modal-backdrop">
@@ -56,16 +55,16 @@
             </div>
           </div>
 
-          <div class="login-btn_decor" @click="showModal">
+          <!-- <div class="login-btn_decor" @click="showModal">
             Уже есть аккаунт? Войти.
             <login v-show="isModalVisible" @close="closeLogin" />
-          </div>
+          </div> -->
           <div class="registr-butten-style">
             <button
               type="submit"
               value="Send"
               class="b-auth-email__registration-button"
-              @click="close"
+              @click="postUser"
             >
               ЗАРЕГИСТРИРОВАТЬСЯ
             </button>
@@ -77,28 +76,35 @@
 </template>
 
 <script>
-import Login from "@/components/Login.vue";
+import axios from "axios";
+// import Login from "@/components/Login.vue";
 
 export default {
   name: "registr",
-  data: function () {
+  data: function() {
     return {
-      username: "",
-      name: "",
-      email: "",
-      password: "",
+      UserData: {
+        username: "username",
+        name: this.name,
+        email: "email",
+        password: "password",
+      },
       isModalVisible: false,
     };
   },
-  // data() {
-  //   return {
-  //     isModalVisible: false,
-  //   };
-  // },
   methods: {
-    // sendData() {
-    //   console.log(this.username, this.name, this.email, this.password);
-    // },
+    postUser: function() {
+      const str = JSON.stringify(this.UserData);
+      console.log(str);
+      axios
+        .post("http://127.0.0.1:3000/register", str)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     close() {
       console.log(this.username, this.name, this.email, this.password);
       this.$emit("close");
@@ -111,18 +117,9 @@ export default {
     },
   },
   components: {
-    Login,
+    // Login,
   },
 };
-// export default {
-//   name: "Registr",
-//   methods: {
-//     close() {
-//       this.$emit("close");
-//     },
-//   },
-//   components: {},
-// };
 </script>
 
 <style scoped>
@@ -195,4 +192,3 @@ export default {
   cursor: default;
 }
 </style>
-

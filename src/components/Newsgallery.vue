@@ -23,6 +23,14 @@ export default {
   components: {
     Cardnews,
   },
+  computed: {
+    filteredCustomers: function() {
+      var self = this;
+      return this.customers.filter(function(cust) {
+        return cust.name.toLowerCase().indexOf(self.search.toLowerCase()) >= 0;
+      });
+    },
+  },
 };
 </script>
 
