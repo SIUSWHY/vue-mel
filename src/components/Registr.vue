@@ -80,33 +80,48 @@ import axios from "axios";
 // import Login from "@/components/Login.vue";
 
 export default {
-  name: "registr",
-  data: function() {
+  // name: "registr",
+  data() {
     return {
-      UserData: {
-        username: "username",
-        name: this.name,
-        email: "email",
-        password: "password",
-      },
-      isModalVisible: false,
+      username: "",
+      name: "",
+      email: "",
+      password: "",
     };
   },
   methods: {
-    postUser: function() {
-      const str = JSON.stringify(this.UserData);
-      console.log(str);
-      axios
-        .post("http://127.0.0.1:3000/register", str)
-        .then((response) => {
-          console.log(response);
+    // postUser: function() {
+    //   const str = JSON.stringify(
+    //     this.username + this.name + this.email + this.password
+    //   );
+
+    //   console.log(str);
+    //   axios
+    //     .post("http://127.0.0.1:3000/register", str)
+    //     .then((response) => {
+    //       console.log(response);
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //     });
+    // },
+    async postUser() {
+      console.log(this.username, this.name, this.email, this.password);
+      console.log(
+        await axios({
+          url: "http://127.0.0.1:3000/register",
+          method: "post",
+          data: {
+            username: this.username,
+            name: this.name,
+            email: this.email,
+            password: this.password,
+          },
         })
-        .catch((error) => {
-          console.log(error);
-        });
+      );
     },
     close() {
-      console.log(this.username, this.name, this.email, this.password);
+      // console.log(this.username, this.name, this.email, this.password);
       this.$emit("close");
     },
     showModal() {

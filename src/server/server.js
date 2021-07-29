@@ -59,39 +59,40 @@ async function run() {
 
   //register
   app.post("/register", function(req, res) {
-    // console.log(req);
+    console.log(req.body);
     const username = req.body.usern;
     const email = req.body.email;
     const password = req.body.password;
+    const name = req.body.name;
+    console.log(name, email, password, username);
+    let errors = null;
 
-    // let errors = null;
-
-    // if (errors) {
-    // } else {
-    //   let newUser = new User({
-    //     name: name,
-    //     email: email,
-    //     username: username,
-    //     password: password,
-    //   });
-    //   bcrypt.genSalt(10, function(err, salt) {
-    //     bcrypt.hash(newUser.password, salt, function(err, hash) {
-    //       if (err) {
-    //         console.log(err);
-    //       }
-    //       newUser.password = hash;
-    //       newUser.save(function(err) {
-    //         if (err) {
-    //           console.log(err);
-    //           return;
-    //         } else {
-    //           res.send(newUser);
-    //           //   res.redirect('/users/login');
-    //         }
-    //       });
-    //     });
-    //   });
-    // }
+    if (errors) {
+    } else {
+      let newUser = new User({
+        username: username,
+        name1: name,
+        email: email,
+        password: password,
+      });
+      bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(newUser.password, salt, function(err, hash) {
+          if (err) {
+            console.log(err);
+          }
+          newUser.password = hash;
+          newUser.save(function(err) {
+            if (err) {
+              console.log(err);
+              return;
+            } else {
+              res.send(newUser);
+              //   res.redirect('/users/login');
+            }
+          });
+        });
+      });
+    }
   });
 
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
