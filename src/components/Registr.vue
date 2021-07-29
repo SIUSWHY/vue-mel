@@ -64,7 +64,12 @@
               type="submit"
               value="Send"
               class="b-auth-email__registration-button"
-              @click="postUser"
+              @click="
+                () => {
+                  postUser();
+                  close();
+                }
+              "
             >
               ЗАРЕГИСТРИРОВАТЬСЯ
             </button>
@@ -130,9 +135,6 @@ export default {
     },
     showModal() {
       this.isModalVisible = true;
-    },
-    closeLogin() {
-      this.isModalVisible = false;
     },
   },
   components: {

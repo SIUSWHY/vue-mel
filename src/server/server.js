@@ -71,7 +71,7 @@ async function run() {
     } else {
       let newUser = new User({
         username: username,
-        name1: name,
+        name: name,
         email: email,
         password: password,
       });
