@@ -91,11 +91,16 @@ export default {
   },
   methods: {
     // postUser: function() {
-    //   const str = JSON.stringify(
-    //     this.username + this.name + this.email + this.password
-    //   );
+    //   const str = {
+    //     data: {
+    //       username: this.username,
+    //       name: this.name,
+    //       email: this.email,
+    //       password: this.password,
+    //     },
+    //   };
 
-    //   console.log(str);
+    //   // console.log(str);
     //   axios
     //     .post("http://127.0.0.1:3000/register", str)
     //     .then((response) => {
@@ -105,20 +110,19 @@ export default {
     //       console.log(error);
     //     });
     // },
+
     async postUser() {
       console.log(this.username, this.name, this.email, this.password);
-      console.log(
-        await axios({
-          url: "http://127.0.0.1:3000/register",
-          method: "post",
-          data: {
-            username: this.username,
-            name: this.name,
-            email: this.email,
-            password: this.password,
-          },
-        })
-      );
+      await axios({
+        url: "http://127.0.0.1:3000/register",
+        method: "post",
+        data: {
+          username: this.username,
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        },
+      });
     },
     close() {
       // console.log(this.username, this.name, this.email, this.password);

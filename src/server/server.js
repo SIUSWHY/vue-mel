@@ -16,7 +16,7 @@ async function run() {
 
   app.use(cors());
   // app.use(bodyParser.urlencoded());
-  // app.use(bodyParser.json());
+  app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
   await mongoose.connect("mongodb://localhost:27017/mel", {
@@ -60,7 +60,7 @@ async function run() {
   //register
   app.post("/register", function(req, res) {
     console.log(req.body);
-    const username = req.body.usern;
+    const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
     const name = req.body.name;
