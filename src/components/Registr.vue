@@ -14,53 +14,73 @@
             <div class="b-auth-email__input-label">Имя пользователя</div>
             <div>
               <input
-                v-model="username"
+                v-model.trim="$v.username.$model"
                 id="username"
                 class="g-input__input"
                 type="text"
               />
+              <div class="error">
+                <div v-if="!$v.username.minLength">
+                  Имя пользователя должно содержать более
+                  {{ $v.username.$params.minLength.min }} символов.
+                </div>
+                <div v-else-if="!$v.username.maxLength">
+                  Имя пользователя должно содержать не более
+                  {{ $v.username.$params.maxLength.max }} символов.
+                </div>
+              </div>
             </div>
           </div>
           <div class="bottom-margin-input-lable">
             <div class="b-auth-email__input-label">Имя</div>
             <div>
               <input
-                v-model="name"
+                v-model.trim="$v.name.$model"
                 id="name"
                 class="g-input__input"
                 type="text"
               />
+              <div class="error" v-if="$v.name.$error">
+                <div v-if="!$v.name.minLength">
+                  Имя должно содержать более
+                  {{ $v.name.$params.minLength.min }} символов.
+                </div>
+                <div v-else-if="!$v.name.alpha">
+                  Имя должно содержать только ланитские символы.
+                </div>
+              </div>
             </div>
           </div>
           <div class="bottom-margin-input-lable">
             <div class="b-auth-email__input-label">E-mail</div>
             <div>
               <input
-                v-model="email"
+                v-model.trim="$v.email.$model"
                 id="email"
                 class="g-input__input"
                 type="text"
               />
+              <div class="error" v-if="$v.email.$error">
+                <div v-if="!$v.email.email">
+                  Электронный адресс введен не корректно.
+                </div>
+              </div>
             </div>
           </div>
           <div class="bottom-margin-input-lable">
             <div class="b-auth-email__input-label">Пароль</div>
             <div>
               <input
-                v-model="password"
-                id="passwoed"
+                v-model.trim="$v.password.$model"
+                id="password"
                 class="g-input__input"
                 type="password"
               />
             </div>
           </div>
-
-          <!-- <div class="login-btn_decor" @click="showModal">
-            Уже есть аккаунт? Войти.
-            <login v-show="isModalVisible" @close="closeLogin" />
-          </div> -->
           <div class="registr-butten-style">
             <button
+              :disabled="$v.$invalid"
               type="submit"
               value="Send"
               class="b-auth-email__registration-button"
@@ -82,7 +102,12 @@
 
 <script>
 import axios from "axios";
-// import Login from "@/components/Login.vue";
+import {
+  required,
+  minLength,
+  maxLength,
+  email,
+} from "vuelidate/lib/validators";
 
 export default {
   // name: "registr",
@@ -94,28 +119,28 @@ export default {
       password: "",
     };
   },
+  validations: {
+    username: {
+      required,
+      minLength: minLength(5),
+      maxLength: maxLength(12),
+    },
+    name: {
+      required,
+      minLength: minLength(4),
+      maxLength: maxLength(10),
+      alpha: (val) => /^[а-яё]*$/i.test(val),
+    },
+    email: {
+      required,
+      email,
+    },
+    password: {
+      required,
+      minLength: minLength(4),
+    },
+  },
   methods: {
-    // postUser: function() {
-    //   const str = {
-    //     data: {
-    //       username: this.username,
-    //       name: this.name,
-    //       email: this.email,
-    //       password: this.password,
-    //     },
-    //   };
-
-    //   // console.log(str);
-    //   axios
-    //     .post("http://127.0.0.1:3000/register", str)
-    //     .then((response) => {
-    //       console.log(response);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
-
     async postUser() {
       console.log(this.username, this.name, this.email, this.password);
       await axios({
@@ -137,9 +162,7 @@ export default {
       this.isModalVisible = true;
     },
   },
-  components: {
-    // Login,
-  },
+  components: {},
 };
 </script>
 
@@ -211,5 +234,9 @@ export default {
   justify-content: center;
   align-items: center;
   cursor: default;
+}
+.error {
+  max-width: 230px;
+  color: #ff253a;
 }
 </style>
