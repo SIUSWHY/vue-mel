@@ -8,7 +8,7 @@ var cors = require("cors");
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const User = require("./models/users");
+const User = require("./models/users").default;
 
 async function run() {
   const app = express();
@@ -58,34 +58,37 @@ async function run() {
   });
 
   //register
-  // app.post("/register", function(req, res) {
-  //   router.use(
-  //     expressValidator({
-  //       customValidators: {
-  //         isUsernameAvailable(username) {
-  //           return new Promise((resolve, reject) => {
-  //             User.findOne({ username: username }, (err, user) => {
-  //               if (err) throw err;
-  //               if (user == null) {
-  //                 resolve();
-  //               } else {
-  //                 reject();
-  //               }
-  //             });
-  //           });
-  //         },
-  //       },
-  //     })
-  //   );
-
+  app.post("/register", async function(req, res) {
     // console.log(req.body);
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
     const name = req.body.name;
-    console.log(name, email, password, username);
-    let errors = null;
 
+    console.log(name, email, password, username);
+
+    if (
+      !name ||
+      name.lenght < 4 ||
+      name.lenght > 10 ||
+      !/^[а-яё]*$/i.test(val)
+    ) {
+      return res.status(422).send({
+        message: "Name WRONG",
+      });
+    }
+
+    // const isExists = await User.findOne({
+    //   email: email,
+    // });
+
+    // if (isExists !== null) {
+    //   return res.status(422).send({
+    //     message: "USER WRONG",
+    //   });
+    // }
+
+    let errors = null;
     if (errors) {
     } else {
       let newUser = new User({
