@@ -46,7 +46,7 @@
                   {{ $v.name.$params.minLength.min }} символов.
                 </div>
                 <div v-else-if="!$v.name.alpha">
-                  Имя должно содержать только ланитские символы.
+                  Имя должно содержать только символы кириллицы.
                 </div>
               </div>
             </div>
@@ -76,6 +76,12 @@
                 class="g-input__input"
                 type="password"
               />
+              <div class="error" v-if="$v.password.$error">
+                <div v-if="!$v.password.goodPassword">
+                  Пароль должен содержать латинские заглавные,строчные и
+                  числовые символы.
+                </div>
+              </div>
             </div>
           </div>
           <div class="registr-butten-style">
@@ -137,7 +143,15 @@ export default {
     },
     password: {
       required,
-      minLength: minLength(4),
+      goodPassword: (password) => {
+        //a custom validator!
+        return (
+          password.length >= 8 &&
+          /[a-z]/.test(password) &&
+          /[A-Z]/.test(password) &&
+          /[0-9]/.test(password)
+        );
+      },
     },
   },
   methods: {

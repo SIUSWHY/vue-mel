@@ -58,8 +58,27 @@ async function run() {
   });
 
   //register
-  app.post("/register", function(req, res) {
-    console.log(req.body);
+  // app.post("/register", function(req, res) {
+  //   router.use(
+  //     expressValidator({
+  //       customValidators: {
+  //         isUsernameAvailable(username) {
+  //           return new Promise((resolve, reject) => {
+  //             User.findOne({ username: username }, (err, user) => {
+  //               if (err) throw err;
+  //               if (user == null) {
+  //                 resolve();
+  //               } else {
+  //                 reject();
+  //               }
+  //             });
+  //           });
+  //         },
+  //       },
+  //     })
+  //   );
+
+    // console.log(req.body);
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
