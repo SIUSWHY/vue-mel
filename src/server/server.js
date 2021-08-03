@@ -57,62 +57,63 @@ async function run() {
     res.send(user);
   });
 
+  const { body, check, validationResult } = require("express-validator");
+
   //register
-  // app.post("/register", function(req, res) {
-  //   router.use(
-  //     expressValidator({
-  //       customValidators: {
-  //         isUsernameAvailable(username) {
-  //           return new Promise((resolve, reject) => {
-  //             User.findOne({ username: username }, (err, user) => {
-  //               if (err) throw err;
-  //               if (user == null) {
-  //                 resolve();
-  //               } else {
-  //                 reject();
-  //               }
-  //             });
-  //           });
-  //         },
-  //       },
-  //     })
-  //   );
-
-    // console.log(req.body);
-    const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
-    const name = req.body.name;
-    console.log(name, email, password, username);
-    let errors = null;
-
-    if (errors) {
-    } else {
-      let newUser = new User({
-        username: username,
-        name: name,
-        email: email,
-        password: password,
+  app.post(
+    "/register",
+    check("email").custom((value) => {
+      return User.findOne({
+        email: value,
+      }).then((user) => {
+        if (user) {
+          return Promise.reject("E-mail already in use");
+        }
       });
-      bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(newUser.password, salt, function(err, hash) {
-          if (err) {
-            console.log(err);
-          }
-          newUser.password = hash;
-          newUser.save(function(err) {
+    }),
+    body("password").isLength({ min: 5 }),
+    function(req, res) {
+      const Errors = validationResult(req);
+      if (!Errors.isEmpty()) {
+        return res.status(400).json({ errors: Errors.array() });
+      }
+
+      // console.log(req.body);
+      const username = req.body.username;
+      const email = req.body.email;
+      const password = req.body.password;
+      const name = req.body.name;
+      console.log(name, email, password, username);
+      let errors = null;
+
+      if (errors) {
+      } else {
+        let newUser = new User({
+          username: username,
+          name: name,
+          email: email,
+          password: password,
+        });
+        bcrypt.genSalt(10, function(err, salt) {
+          bcrypt.hash(newUser.password, salt, function(err, hash) {
             if (err) {
               console.log(err);
-              return;
-            } else {
-              res.send(newUser);
-              //   res.redirect('/users/login');
             }
+            newUser.password = hash;
+            newUser.save(function(err) {
+              if (err) {
+                console.log(err);
+                return;
+              } else {
+                res.send(newUser);
+                //   res.redirect('/users/login');
+              }
+            });
           });
         });
-      });
+      }
     }
-  });
+  );
 
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 }

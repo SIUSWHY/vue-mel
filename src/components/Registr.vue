@@ -112,7 +112,7 @@ import {
   required,
   minLength,
   maxLength,
-  email,
+  // email,
 } from "vuelidate/lib/validators";
 
 export default {
@@ -139,19 +139,19 @@ export default {
     },
     email: {
       required,
-      email,
+      // email,
     },
     password: {
       required,
-      goodPassword: (password) => {
-        //a custom validator!
-        return (
-          password.length >= 8 &&
-          /[a-z]/.test(password) &&
-          /[A-Z]/.test(password) &&
-          /[0-9]/.test(password)
-        );
-      },
+      // goodPassword: (password) => {
+      //   //a custom validator!
+      //   return (
+      //     password.length >= 8 &&
+      //     /[a-z]/.test(password) &&
+      //     /[A-Z]/.test(password) &&
+      //     /[0-9]/.test(password)
+      //   );
+      // },
     },
   },
   methods: {
