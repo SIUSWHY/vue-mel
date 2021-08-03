@@ -135,7 +135,7 @@ export default {
       required,
       minLength: minLength(4),
       maxLength: maxLength(10),
-      alpha: (val) => /^[а-яё]*$/i.test(val),
+      // alpha: (val) => /^[а-яё]*$/i.test(val),
     },
     email: {
       required,

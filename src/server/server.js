@@ -8,7 +8,7 @@ var cors = require("cors");
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const User = require("./models/users");
+const User = require("./models/users").default;
 
 async function run() {
   const app = express();
