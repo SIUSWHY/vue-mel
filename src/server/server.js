@@ -62,20 +62,36 @@ async function run() {
   //register
   app.post(
     "/register",
-    check("email").custom((value) => {
-      return User.findOne({
-        email: value,
-      }).then((user) => {
-        if (user) {
-          return Promise.reject("E-mail already in use");
-        }
-      });
-    }),
-    body("password").isLength({ min: 5 }),
+    // check(["email", "username"]).custom((value) => {
+    //   console.log(value);
+    //   return User.findOne({
+    //     email: value,
+    //     username: value,
+    //   }).then((user) => {
+    //     if (user.email) {
+    //       return Promise.reject("E-mail already in use");
+    //     }
+    //     if (user.username) {
+    //       return Promise.reject("Username already in use");
+    //     }
+    //   });
+    // }),
+    // body("password").isLength({ min: 5 }),
+    User.findOne(
+      {
+        $or: [{ email: param }, { username: param }],
+      },
+      function(err, docs) {
+        if (email === $or.email) {
+        } else if (!err) res.send(docs);
+      }
+    ),
     function(req, res) {
       const Errors = validationResult(req);
       if (!Errors.isEmpty()) {
         return res.status(400).json({ errors: Errors.array() });
+      } else {
+        res.send(200);
       }
 
       // console.log(req.body);
