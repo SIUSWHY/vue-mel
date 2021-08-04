@@ -112,11 +112,11 @@ import {
   required,
   minLength,
   maxLength,
-  // email,
+  email,
 } from "vuelidate/lib/validators";
 
 export default {
-  // name: "registr",
+  name: "registr",
   data() {
     return {
       username: "",
@@ -135,23 +135,23 @@ export default {
       required,
       minLength: minLength(4),
       maxLength: maxLength(10),
-      // alpha: (val) => /^[а-яё]*$/i.test(val),
+      alpha: (val) => /^[а-яё]*$/i.test(val),
     },
     email: {
       required,
-      // email,
+      email,
     },
     password: {
       required,
-      // goodPassword: (password) => {
-      //   //a custom validator!
-      //   return (
-      //     password.length >= 8 &&
-      //     /[a-z]/.test(password) &&
-      //     /[A-Z]/.test(password) &&
-      //     /[0-9]/.test(password)
-      //   );
-      // },
+      goodPassword: (password) => {
+        //a custom validator!
+        return (
+          password.length >= 8 &&
+          /[a-z]/.test(password) &&
+          /[A-Z]/.test(password) &&
+          /[0-9]/.test(password)
+        );
+      },
     },
   },
   methods: {

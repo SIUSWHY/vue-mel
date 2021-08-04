@@ -8,7 +8,7 @@ var cors = require("cors");
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const User = require("./models/users").default;
+const User = require("./models/users");
 
 async function run() {
   const app = express();
@@ -60,76 +60,61 @@ async function run() {
   const { body, check, validationResult } = require("express-validator");
 
   //register
-  app.post(
-    "/register",
-    // check(["email", "username"]).custom((value) => {
-    //   console.log(value);
-    //   return User.findOne({
-    //     email: value,
-    //     username: value,
-    //   }).then((user) => {
-    //     if (user.email) {
-    //       return Promise.reject("E-mail already in use");
-    //     }
-    //     if (user.username) {
-    //       return Promise.reject("Username already in use");
-    //     }
+  app.post("/register", async function(req, res) {
+    const Errors = validationResult(req);
+    if (!Errors.isEmpty()) {
+      return res.status(400).json({ errors: Errors.array() });
+    } else {
+      // return res.send(200);
+    }
+
+    // console.log(req.body);
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+    const name = req.body.name;
+
+    const users = await User.findOne({
+      $or: [{ email }, { username }],
+    });
+
+    // if (users.length !== 0) {
+    //   return res.send({
+    //     errors: ["User esists"],
     //   });
-    // }),
-    // body("password").isLength({ min: 5 }),
-    User.findOne(
-      {
-        $or: [{ email: param }, { username: param }],
-      },
-      function(err, docs) {
-        if (email === $or.email) {
-        } else if (!err) res.send(docs);
-      }
-    ),
-    function(req, res) {
-      const Errors = validationResult(req);
-      if (!Errors.isEmpty()) {
-        return res.status(400).json({ errors: Errors.array() });
-      } else {
-        res.send(200);
-      }
+    //   if users
+    // }
 
-      // console.log(req.body);
-      const username = req.body.username;
-      const email = req.body.email;
-      const password = req.body.password;
-      const name = req.body.name;
-      console.log(name, email, password, username);
-      let errors = null;
+    console.log(name, email, password, username);
+    let errors = null;
 
-      if (errors) {
-      } else {
-        let newUser = new User({
-          username: username,
-          name: name,
-          email: email,
-          password: password,
-        });
-        bcrypt.genSalt(10, function(err, salt) {
-          bcrypt.hash(newUser.password, salt, function(err, hash) {
+    if (errors) {
+    } else {
+      let newUser = new User({
+        username: username,
+        name: name,
+        email: email,
+        password: password,
+      });
+      bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(newUser.password, salt, function(err, hash) {
+          if (err) {
+            console.log(err);
+          }
+          newUser.password = hash;
+          newUser.save(function(err) {
             if (err) {
               console.log(err);
+              return;
+            } else {
+              res.send(newUser);
+              //   res.redirect('/users/login');
             }
-            newUser.password = hash;
-            newUser.save(function(err) {
-              if (err) {
-                console.log(err);
-                return;
-              } else {
-                res.send(newUser);
-                //   res.redirect('/users/login');
-              }
-            });
           });
         });
-      }
+      });
     }
-  );
+  });
 
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 }
