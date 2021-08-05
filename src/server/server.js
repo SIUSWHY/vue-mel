@@ -2,8 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+// const ObjectId = Schema.ObjectId;
 const User = require("./models/users");
+const validation = require("./models/validation");
 
 var cors = require("cors");
 
@@ -53,38 +54,12 @@ async function run() {
     res.send(user);
   });
 
-  const { body, check, validationResult } = require("express-validator");
+  // const { body, check, validationResult } = require("express-validator");
 
   //register
   app.post("/register", async function(req, res) {
-    const Errors = validationResult(req);
-    if (!Errors.isEmpty()) {
-      return res.status(400).json({ errors: Errors.array() });
-    } else {
-      // return res.send(200);
-    }
-
-    // console.log(req.body);
-    const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
-    const name = req.body.name;
-
-    const users = await User.findOne({
-      $or: [{ email }, { username }],
-    });
-
-    // if (users.length !== 0) {
-    //   return res.send({
-    //     errors: ["User esists"],
-    //   });
-    //   if users
-    // }
-
-    console.log(name, email, password, username);
-    let errors = null;
-
-    if (errors) {
+    const errors = await validation;
+    if (errors !== null) {
     } else {
       let newUser = new User({
         username: username,
