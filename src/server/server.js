@@ -1,21 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
-
-var cors = require("cors");
-
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
-
 const User = require("./models/users");
+
+var cors = require("cors");
 
 async function run() {
   const app = express();
   const port = 3000;
 
   app.use(cors());
-  // app.use(bodyParser.urlencoded());
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
