@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const Schema = mongoose.Schema;
 // const ObjectId = Schema.ObjectId;
 const User = require("./models/users");
-const validation = require("./models/validation");
+const {validation} = require("./models/validation");
 
 var cors = require("cors");
 
@@ -58,9 +58,18 @@ async function run() {
 
   //register
   app.post("/register", async function(req, res) {
-    const errors = await validation;
-    if (errors !== null) {
+    const errors = await validation(req);
+    if (errors.length !== 0) {
+      return res.send({
+        errors
+      })
     } else {
+      const username = req.body.username;
+      const email = req.body.email;
+      const password = req.body.password;
+      const name = req.body.name;
+
+
       let newUser = new User({
         username: username,
         name: name,
