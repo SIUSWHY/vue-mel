@@ -30,14 +30,14 @@ async function run() {
     newDate: String,
   });
 
-  const MyModel = mongoose.model("card", CardsSchema);
+  const Cards = mongoose.model("card", CardsSchema);
 
   // REST
   app.get("/", (req, res) => res.send("Hello World!"));
 
   //get cards
   app.get("/cards", async (req, res) => {
-    const cards = await MyModel.find();
+    const cards = await Cards.find();
 
     if (req.query.sort) {
       const key = req.query.sort;
@@ -70,17 +70,19 @@ async function run() {
       const name = req.body.name;
 
 
-      let newUser = new User({
+      const newUser = new User({
         username: username,
         name: name,
         email: email,
         password: password,
       });
+
       bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(newUser.password, salt, function(err, hash) {
           if (err) {
             console.log(err);
           }
+          
           newUser.password = hash;
           newUser.save(function(err) {
             if (err) {

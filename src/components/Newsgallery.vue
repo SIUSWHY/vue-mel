@@ -24,9 +24,9 @@ export default {
     Cardnews,
   },
   computed: {
-    filteredCustomers: function() {
+    filteredCustomers: function () {
       var self = this;
-      return this.customers.filter(function(cust) {
+      return this.customers.filter(function (cust) {
         return cust.name.toLowerCase().indexOf(self.search.toLowerCase()) >= 0;
       });
     },
