@@ -1,12 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const Schema = mongoose.Schema;
-// const ObjectId = Schema.ObjectId;
-const User = require("./models/users");
-const {validation} = require("./models/validation");
+const User = require("./models/modelUsers");
+const Cards = require("./models/modelCards");
+const {cryptPassword} = require("./models/cryptPassword");
 
 var cors = require("cors");
+const { validation } = require("./models/validation");
 
 async function run() {
   const app = express();
@@ -21,30 +20,17 @@ async function run() {
     useUnifiedTopology: true,
   });
 
-  const CardsSchema = new Schema({
-    title: String,
-    text: String,
-    img: String,
-    viewCount: Number,
-    commentCount: Number,
-    newDate: String,
-  });
-
-  const Cards = mongoose.model("card", CardsSchema);
-
   // REST
   app.get("/", (req, res) => res.send("Hello World!"));
 
   //get cards
   app.get("/cards", async (req, res) => {
     const cards = await Cards.find();
-
     if (req.query.sort) {
       const key = req.query.sort;
 
       cards.sort((item1, item2) => (item1[key] > item2[key] ? -1 : 1));
     }
-
     res.send(cards);
   });
 
@@ -57,7 +43,7 @@ async function run() {
   // const { body, check, validationResult } = require("express-validator");
 
   //register
-  app.post("/register", async function(req, res) {
+     app.post("/register", async function(req, res) {
     const errors = await validation(req);
     if (errors.length !== 0) {
       return res.send({
@@ -69,32 +55,28 @@ async function run() {
       const password = req.body.password;
       const name = req.body.name;
 
+      const passwordHash = await cryptPassword(password);
+
+      console.log('passwordHash', passwordHash)
 
       const newUser = new User({
         username: username,
         name: name,
         email: email,
-        password: password,
+        password: passwordHash,
       });
 
-      bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(newUser.password, salt, function(err, hash) {
-          if (err) {
-            console.log(err);
-          }
-          
-          newUser.password = hash;
-          newUser.save(function(err) {
+      console.log(newUser)
+
+      return newUser.save(function(err) {
             if (err) {
               console.log(err);
               return;
             } else {
-              res.send(newUser);
+              return res.send(newUser);
               //   res.redirect('/users/login');
             }
           });
-        });
-      });
     }
   });
 
