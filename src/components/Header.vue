@@ -30,7 +30,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 import Modal from "@/components/Registre.vue";
 
 export default {
