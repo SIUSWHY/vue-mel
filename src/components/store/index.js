@@ -1,7 +1,7 @@
 // import axios from "axios";
 import Vue from "vue";
 import Vuex from "vuex";
-import { getCards } from "../cards/cards";
+import { getCards } from "@/API/cards";
 // import cards from "@/components/cardata";
 Vue.use(Vuex);
 
