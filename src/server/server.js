@@ -71,7 +71,6 @@ async function run() {
 
       // return res.status(500).send(error.message)
       
-
       return newUser.save(function(err) {
             if (err) {
               console.log(err);

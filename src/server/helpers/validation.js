@@ -6,15 +6,9 @@ async function validation(req) {
 
   if (!Errors.isEmpty()) {
     return Errors.array()
-  } else {
-    // return res.send(200);
-  }
-
-  // console.log(req.body);
+  } 
   const username = req.body.username
   const email = req.body.email
-  const password = req.body.password
-  const name = req.body.name
 
   const user = await User.findOne({
     $or: [{ email }, { username }]
@@ -24,7 +18,6 @@ async function validation(req) {
     return ['User exists']
   }
 
-  // console.log(name, email, password, username);
   return []
 }
 
