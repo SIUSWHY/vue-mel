@@ -6,7 +6,7 @@ async function validation(req) {
 
   if (!Errors.isEmpty()) {
     return Errors.array()
-  } 
+  }
   const username = req.body.username
   const email = req.body.email
 

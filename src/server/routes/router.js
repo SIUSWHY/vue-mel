@@ -6,16 +6,16 @@ import Thanks from './views/Thanks.vue'
 Vue.use(Router)
 
 export default new Router({
-    routes: [
-        {
-            path: '/',
-            name: 'App',
-            component: App
-        },
-        {
-            path: '/thanks',
-            name: 'thanks',
-            component: Thanks
-        }
-    ]
-});
+  routes: [
+    {
+      path: '/',
+      name: 'App',
+      component: App
+    },
+    {
+      path: '/thanks',
+      name: 'thanks',
+      component: Thanks
+    }
+  ]
+})

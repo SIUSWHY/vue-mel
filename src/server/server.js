@@ -1,88 +1,88 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const User = require("./models/modelUsers");
-const Cards = require("./models/modelCards");
-const {cryptPassword} = require("./helpers/cryptPassword");
+const express = require('express')
+const mongoose = require('mongoose')
+const User = require('./models/modelUsers')
+const Cards = require('./models/modelCards')
+const { cryptPassword } = require('./helpers/cryptPassword')
 
-var cors = require("cors");
-const { validation } = require("./helpers/validation");
+var cors = require('cors')
+const { validation } = require('./helpers/validation')
 
 async function run() {
-  const app = express();
-  const port = 3000;
+  const app = express()
+  const port = 3000
 
-  app.use(cors());
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+  app.use(cors())
+  app.use(express.json())
+  app.use(express.urlencoded({ extended: true }))
 
-  await mongoose.connect("mongodb://localhost:27017/mel", {
+  await mongoose.connect('mongodb://localhost:27017/mel', {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+    useUnifiedTopology: true
+  })
 
   // REST
-  app.get("/", (req, res) => res.send("Hello World!"));
+  app.get('/', (req, res) => res.send('Hello World!'))
 
   //get cards
-  app.get("/cards", async (req, res) => {
-    const cards = await Cards.find();
+  app.get('/cards', async (req, res) => {
+    const cards = await Cards.find()
     if (req.query.sort) {
-      const key = req.query.sort;
+      const key = req.query.sort
 
-      cards.sort((item1, item2) => (item1[key] > item2[key] ? -1 : 1));
+      cards.sort((item1, item2) => (item1[key] > item2[key] ? -1 : 1))
     }
-    res.send(cards);
-  });
+    res.send(cards)
+  })
 
   //get users
-  app.get("/users", async (req, res) => {
-    const user = await User.find();
-    res.send(user);
-  });
+  app.get('/users', async (req, res) => {
+    const user = await User.find()
+    res.send(user)
+  })
 
   // const { body, check, validationResult } = require("express-validator");
 
   //register
-     app.post("/register", async function(req, res) {
-    const errors = await validation(req);
+  app.post('/register', async function(req, res) {
+    const errors = await validation(req)
     if (errors.length !== 0) {
       return res.send({
         errors
       })
     }
 
-      const username = req.body.username;
-      const email = req.body.email;
-      const password = req.body.password;
-      const name = req.body.name;
+    const username = req.body.username
+    const email = req.body.email
+    const password = req.body.password
+    const name = req.body.name
 
-      const passwordHash = await cryptPassword(password);
+    const passwordHash = await cryptPassword(password)
 
-      console.log('passwordHash', passwordHash)
+    console.log('passwordHash', passwordHash)
 
-      const newUser = new User({
-        username: username,
-        name: name,
-        email: email,
-        password: passwordHash,
-      });
+    const newUser = new User({
+      username: username,
+      name: name,
+      email: email,
+      password: passwordHash
+    })
 
-      console.log(newUser);
+    console.log(newUser)
 
-      // return res.status(500).send(error.message)
-      
-      return newUser.save(function(err) {
-            if (err) {
-              console.log(err);
-              return;
-            } else {
-              return res.send(newUser);
-              //   res.redirect('/users/login');
-            }
-          });
-  });
+    // return res.status(500).send(error.message)
 
-  app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+    return newUser.save(function(err) {
+      if (err) {
+        console.log(err)
+        return
+      } else {
+        return res.send(newUser)
+        //   res.redirect('/users/login');
+      }
+    })
+  })
+
+  app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 }
 
-run();
+run()

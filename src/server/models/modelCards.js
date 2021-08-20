@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const CardsSchema = mongoose.Schema({
   title: String,
@@ -6,9 +6,9 @@ const CardsSchema = mongoose.Schema({
   img: String,
   viewCount: Number,
   commentCount: Number,
-  newDate: String,
-});
+  newDate: String
+})
 
-const Cards = mongoose.model("card", CardsSchema);
+const Cards = mongoose.model('card', CardsSchema)
 
-module.exports = Cards;
+module.exports = Cards
