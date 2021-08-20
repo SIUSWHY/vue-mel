@@ -8,7 +8,7 @@
 <script>
 import Header from "./components/Header.vue";
 import Newsgallery from "./components/Newsgallery.vue";
-import store from "@/components/vuex/store";
+import store from "@/components/store/index";
 
 export default {
   name: "App",

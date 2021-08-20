@@ -13,7 +13,7 @@
 <script>
 // import { mapGetters } from "vuex";
 import Cardnews from "./Cardnews.vue";
-import store from "./vuex/store";
+import store from "./store";
 
 export default {
   name: "Newsgallery",

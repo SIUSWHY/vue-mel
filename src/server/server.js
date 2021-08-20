@@ -2,10 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const User = require("./models/modelUsers");
 const Cards = require("./models/modelCards");
-const {cryptPassword} = require("./models/cryptPassword");
+const {cryptPassword} = require("./helpers/cryptPassword");
 
 var cors = require("cors");
-const { validation } = require("./models/validation");
+const { validation } = require("./helpers/validation");
 
 async function run() {
   const app = express();
