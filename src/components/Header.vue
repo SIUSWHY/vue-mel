@@ -13,12 +13,7 @@
       </div>
       <div class="l-nav-b_position">
         <div>
-          <input
-            class="search-b"
-            type="text"
-            placeholder="  Ищите статью?"
-            id=""
-          />
+          <input class="search-b" type="text" placeholder="  Ищите статью?" />
           <font-awesome-icon icon="search" />
         </div>
         <a class="type-list-right-menu" href=""
@@ -48,12 +43,6 @@ export default {
       isModalVisible: false,
     };
   },
-  // mounted() {
-  //   axios
-  //     .get("http://127.0.0.1:3000/cards")
-  //     .then((response) => (this.info = response));
-  // },
-  computed: {},
   methods: {
     showModal() {
       this.isModalVisible = true;
@@ -69,20 +58,13 @@ export default {
 <style scoped>
 .podcast-btn {
   width: 100px;
-  /* text-align: center;
-  background-repeat: no-repeat;
-  background-position: center 51%;
-  background-size: 100px 30px;
-  transition: background-image 0.2s ease-out; */
   background-image: url("/img/trash/menu-podcast-link.svg");
 }
 .si-up_b-style {
-  /* font-size: 13px; */
   font-weight: 600;
   background-color: #47b3ac;
   border-radius: 50px;
   padding: 10px;
-  /* text-decoration: none; */
   color: #ffffff;
   border: none;
   cursor: pointer;
@@ -119,7 +101,6 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* margin: 0 auto; */
   margin: 0px 15px;
   max-width: 1280px;
 }

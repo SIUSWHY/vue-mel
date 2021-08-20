@@ -49,7 +49,8 @@ async function run() {
       return res.send({
         errors
       })
-    } else {
+    }
+
       const username = req.body.username;
       const email = req.body.email;
       const password = req.body.password;
@@ -66,7 +67,10 @@ async function run() {
         password: passwordHash,
       });
 
-      console.log(newUser)
+      console.log(newUser);
+
+      // return res.status(500).send(error.message)
+      
 
       return newUser.save(function(err) {
             if (err) {
@@ -77,7 +81,6 @@ async function run() {
               //   res.redirect('/users/login');
             }
           });
-    }
   });
 
   app.listen(port, () => console.log(`Example app listening on port ${port}!`));

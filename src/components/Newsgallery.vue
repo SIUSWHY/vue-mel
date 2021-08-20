@@ -3,7 +3,7 @@
     <div class="container-cards">
       <Cardnews
         v-for="post in $store.state.posts"
-        :key="post.id"
+        :key="post._id"
         :card_news="post"
       ></Cardnews>
     </div>
@@ -11,7 +11,6 @@
 </template>
 
 <script>
-// import { mapGetters } from "vuex";
 import Cardnews from "./Cardnews.vue";
 import store from "./store";
 
@@ -23,14 +22,6 @@ export default {
   components: {
     Cardnews,
   },
-  computed: {
-    // filteredCustomers: function () {
-    //   var self = this;
-    //   return this.customers.filter(function (cust) {
-    //     return cust.name.toLowerCase().indexOf(self.search.toLowerCase()) >= 0;
-    //   });
-    // },
-  },
 };
 </script>
 
@@ -39,7 +30,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   max-width: 1240px;
-  /* margin: 0% 7%; */
 }
 
 .cardnews_container_style {

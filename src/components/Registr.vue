@@ -169,7 +169,6 @@ export default {
       });
     },
     close() {
-      // console.log(this.username, this.name, this.email, this.password);
       this.$emit("close");
     },
     showModal() {

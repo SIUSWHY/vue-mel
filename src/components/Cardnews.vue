@@ -64,7 +64,6 @@ export default {
 .block_card_style {
   padding: 20px 25px 25px;
   width: 280;
-  /* height: 200px; */
 }
 .content-title {
   color: rgb(236, 52, 94);
