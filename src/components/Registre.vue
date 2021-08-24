@@ -10,7 +10,7 @@
       >
         <div class="darckness">
           <div class="registration-butten-position">
-            <div>Sign</div>
+            <div class="registration_left_position">Sign</div>
             <div class="up_btn_style">Up</div>
           </div>
           <div class="g-tab__content">
@@ -91,7 +91,17 @@
                 </div>
               </div>
             </div>
-            <div>Уже есть аккаунт!? Авторизируйтесь.</div>
+            <div
+              type="button"
+              @click="
+                () => {
+                  showLoginModal();
+                  close();
+                }
+              "
+            >
+              Уже есть аккаунт!? Авторизируйтесь.
+            </div>
             <div class="registr-butten-style">
               <button
                 :disabled="$v.$invalid"
@@ -132,6 +142,8 @@ export default {
       name: "",
       email: "",
       password: "",
+      // isLoginModalVisible: false,
+
     };
   },
   validations: {
@@ -180,16 +192,17 @@ export default {
     close() {
       this.$emit("close");
     },
-    showModal() {
-      this.isModalVisible = true;
+    showLoginModal() {
+      this.$emit('showLoginModal');
     },
+
   },
   components: {
   },
 };
 </script>
 
-<style scoped>
+<style >
 .login-btn_decor {
   color: #8453d2;
   text-decoration: underline;
@@ -219,13 +232,16 @@ export default {
 }
 .registration-butten-position {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   font-size: 25px;
   width: 100px;
   font-weight: 600;
   /* border-bottom: 1px solid #1c1c1c32; */
   height: 25px;
   padding: 20px 0px;
+}
+.registration_left_position {
+  margin-right: 10px;
 }
 .b-auth-email__registration-button {
   /* height: 45px;
@@ -249,8 +265,8 @@ export default {
   margin-top: 20px;
 }
 .b-auth-email__input-label {
-  position: absolute;
-  margin-left: 55px;
+  /* position: absolute; */
+  margin-right: 250px;
 }
 .g-tab__content {
   font: 15px PTSerif, serif;
@@ -267,7 +283,7 @@ export default {
   /* margin: 0px 0px -20px -110px; */
 }
 .bottom-margin-input-lable {
-  margin-bottom: 45px;
+  margin-bottom: 35px;
 }
 .modal-backdrop {
   position: fixed;

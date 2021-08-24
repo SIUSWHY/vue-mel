@@ -23,7 +23,12 @@
         <button class="si-up_b-style" type="button" @click="showModal">
           Sing Up
         </button>
-        <modal v-show="isModalVisible" @close="closeModal" />
+        <modal
+          v-show="isModalVisible"
+          @close="closeModal"
+          @showLoginModal="showLoginModal"
+        />
+        <login v-show="isLoginModalVisible" @close="closeLoginModal" />
       </div>
     </div>
   </div>
@@ -31,15 +36,18 @@
 
 <script>
 import Modal from "@/components/Registre.vue";
+import Login from "@/components/Login.vue";
 
 export default {
   name: "Header",
   components: {
     Modal,
+    Login,
   },
   data() {
     return {
       isModalVisible: false,
+      isLoginModalVisible: false,
     };
   },
   methods: {
@@ -48,6 +56,12 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
+    },
+    showLoginModal() {
+      this.isLoginModalVisible = true;
+    },
+    closeLoginModal() {
+      this.isLoginModalVisible = false;
     },
   },
 };
