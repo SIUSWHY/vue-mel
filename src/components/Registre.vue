@@ -123,6 +123,8 @@
 </template>
 
 <script>
+console.log(process.env)
+
 const { VUE_APP_SERVER_URL } = process.env
 import axios from "axios";
 import {
