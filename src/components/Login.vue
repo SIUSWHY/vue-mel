@@ -22,7 +22,6 @@
                   id="login_email"
                   class="g-input__input"
                   type="text"
-                  autocomplete="off"
                 />
                 <div class="error" v-if="$v.email.$error">
                   <div v-if="!$v.email.email">
@@ -57,6 +56,7 @@
                 @click="
                   () => {
                     close();
+                    loginUser();
                   }
                 "
               >
@@ -71,10 +71,10 @@
 </template>
 
 <script>
+const { VUE_APP_SERVER_URL } = process.env
+import axios from "axios";
 import {
   required,
-  minLength,
-  maxLength,
   email,
 } from "vuelidate/lib/validators";
 
@@ -82,24 +82,11 @@ export default {
   name: "login",
   data() {
     return {
-      username: "",
-      name: "",
       email: "",
       password: "",
     };
   },
   validations: {
-    username: {
-      required,
-      minLength: minLength(5),
-      maxLength: maxLength(12),
-    },
-    name: {
-      required,
-      minLength: minLength(4),
-      maxLength: maxLength(10),
-      alpha: (val) => /^[а-яё]*$/i.test(val),
-    },
     email: {
       required,
       email,
@@ -123,6 +110,17 @@ export default {
     },
     showModal() {
       this.isLoginModalVisible = true;
+    },
+    async loginUser() {
+      await axios({
+        url: VUE_APP_SERVER_URL + '/login',
+        method: "post",
+        data: {
+          email: this.email,
+          password: this.password,
+        },
+        body: JSON.stringify(this),
+      });
     },
   },
   components: {

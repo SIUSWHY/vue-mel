@@ -123,6 +123,7 @@
 </template>
 
 <script>
+const { VUE_APP_SERVER_URL } = process.env
 import axios from "axios";
 import {
   required,
@@ -175,8 +176,9 @@ export default {
   methods: {
     async postUser() {
       console.log(this.username, this.name, this.email, this.password);
+      // axiosInstance.post('register', this);
       await axios({
-        url: "http://127.0.0.1:3000/register",
+        url: VUE_APP_SERVER_URL + '/register',
         method: "post",
         data: {
           username: this.username,

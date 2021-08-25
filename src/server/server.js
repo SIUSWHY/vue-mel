@@ -10,6 +10,8 @@ var cors = require('cors')
 const { validation } = require('./helpers/validation')
 const { createToken } = require('./helpers/createToken')
 
+const loginController = require('./controllers/login')
+
 async function run() {
   const app = express()
   const port = 3000
@@ -46,20 +48,7 @@ async function run() {
   // const { body, check, validationResult } = require("express-validator");
 
   //login
-  app.post('/login', async (req, res) => {
-    try {
-      const { email, password } = req.body
-      const user = await User.findOne({ email })
-
-      if (user === null) {
-        throw new Error('Please regiter')
-      }
-    } catch (error) {
-      return res.status(500).send({
-        errors: [error.message]
-      })
-    }
-  })
+  app.post('/login', loginController)
 
   //register
   app.post('/register', async function(req, res) {
