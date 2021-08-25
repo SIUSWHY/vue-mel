@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const mongoose = require('mongoose')
 const User = require('./models/modelUsers')
@@ -6,6 +8,7 @@ const { cryptPassword } = require('./helpers/cryptPassword')
 
 var cors = require('cors')
 const { validation } = require('./helpers/validation')
+const { createToken } = require('./helpers/createToken')
 
 async function run() {
   const app = express()
@@ -42,6 +45,22 @@ async function run() {
 
   // const { body, check, validationResult } = require("express-validator");
 
+  //login
+  app.post('/login', async (req, res) => {
+    try {
+      const { email, password } = req.body
+      const user = await User.findOne({ email })
+
+      if (user === null) {
+        throw new Error('Please regiter')
+      }
+    } catch (error) {
+      return res.status(500).send({
+        errors: [error.message]
+      })
+    }
+  })
+
   //register
   app.post('/register', async function(req, res) {
     const errors = await validation(req)
@@ -66,20 +85,14 @@ async function run() {
       email: email,
       password: passwordHash
     })
+    await newUser.save()
+    const token = await createToken(newUser)
 
     console.log(newUser)
 
     // return res.status(500).send(error.message)
 
-    return newUser.save(function(err) {
-      if (err) {
-        console.log(err)
-        return
-      } else {
-        return res.send(newUser)
-        //   res.redirect('/users/login');
-      }
-    })
+    return res.send(token)
   })
 
   app.listen(port, () => console.log(`Example app listening on port ${port}!`))

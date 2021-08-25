@@ -22,7 +22,6 @@
                   id="username"
                   class="g-input__input"
                   type="text"
-                  autocomplete="off"
                 />
                 <div class="error">
                   <div v-if="!$v.username.minLength">
@@ -44,7 +43,6 @@
                   id="name"
                   class="g-input__input"
                   type="text"
-                  autocomplete="off"
                 />
                 <div class="error" v-if="$v.name.$error">
                   <div v-if="!$v.name.minLength">
@@ -65,7 +63,6 @@
                   id="email"
                   class="g-input__input"
                   type="text"
-                  autocomplete="off"
                 />
                 <div class="error" v-if="$v.email.$error">
                   <div v-if="!$v.email.email">

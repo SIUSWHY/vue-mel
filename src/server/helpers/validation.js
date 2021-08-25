@@ -16,6 +16,7 @@ async function validation(req) {
 
   if (user !== null) {
     return ['User exists']
+    // return res.status(409).send('User Already Exist. Please Login')
   }
 
   return []
