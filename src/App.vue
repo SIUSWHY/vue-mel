@@ -9,6 +9,8 @@
 import Header from "./components/Header.vue";
 import Newsgallery from "./components/Newsgallery.vue";
 import store from "@/components/store/index";
+require("dotenv").config();
+
 
 export default {
   name: "App",

@@ -17,7 +17,9 @@ const loginContoller = async (req, res) => {
       throw new Error('Invalid password')
     }
 
-    const token = createToken(user)
+    const token = createToken({
+      email: user.email
+    })
     return res.send(token)
   } catch (error) {
     return res.status(500).send({

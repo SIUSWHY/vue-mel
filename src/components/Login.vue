@@ -71,7 +71,7 @@
 </template>
 
 <script>
-const { SERVER_URL } = process.env
+const { VUE_APP_SERVER_URL } = process.env
 import axios from "axios";
 import {
   required,
@@ -113,15 +113,13 @@ export default {
     },
     async loginUser() {
       await axios({
-        url: SERVER_URL + '/login',
+        url: VUE_APP_SERVER_URL + '/login',
         method: "post",
         data: {
           email: this.email,
           password: this.password,
         },
-      }).then((response) => {
-        return response.json()
-      });
+      })
     },
   },
   components: {
