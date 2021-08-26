@@ -1,3 +1,3 @@
-import axios from 'axios'
+import { axiosInstance } from '../API/index'
 
-export const registerUser = () => axios.post('http://127.0.0.1:3000/register')
+export const registerUser = (data) => axiosInstance.post('/register', data)

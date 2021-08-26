@@ -1,11 +1,7 @@
 import axios from 'axios'
+const { VUE_APP_SERVER_URL } = process.env
 
-const axiosInstance = axios.create({
-  baseURL: 'http://127.0.0.1:3000/',
-  timeout: 1000,
-  headers: { 'X-Custom-Header': 'foobar' }
+export const axiosInstance = axios.create({
+  baseURL: VUE_APP_SERVER_URL
+  // timeout: 1000
 })
-
-module.exports = {
-  axiosInstance
-}

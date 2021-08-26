@@ -15,7 +15,7 @@
           </div>
           <div class="g-tab__content">
             <div class="bottom-margin-input-lable">
-              <div class="b-auth-email__input-label">E-mail</div>
+              <!-- <div class="b-auth-email__input-label">E-mail</div> -->
               <div>
                 <input
                   v-model.trim="$v.email.$model"
@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="bottom-margin-input-lable">
-              <div class="b-auth-email__input-label">Пароль</div>
+              <!-- <div class="b-auth-email__input-label">Пароль</div> -->
               <div>
                 <input
                   v-model.trim="$v.password.$model"
@@ -82,8 +82,8 @@ export default {
   name: "login",
   data() {
     return {
-      email: "",
-      password: "",
+      email: "ventsodaniil@yandex.ru",
+      password: "123qweQWE",
     };
   },
   validations: {

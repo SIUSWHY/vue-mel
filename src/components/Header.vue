@@ -2,7 +2,6 @@
   <div class="back-g_headr_menu">
     <div class="r-nav-b_position">
       <div class="r-nav-b_position">
-        <div>Logo</div>
         <nav>
           <ul class="menu_list">
             <li class="active">Тексты</li>

@@ -15,13 +15,14 @@
           </div>
           <div class="g-tab__content">
             <div class="bottom-margin-input-lable">
-              <div class="b-auth-email__input-label">Имя пользователя</div>
+              <!-- <div class="b-auth-email__input-label">Имя пользователя</div> -->
               <div>
                 <input
                   v-model.trim="$v.username.$model"
                   id="username"
                   class="g-input__input"
                   type="text"
+                  placeholder="Имя пользователя"
                 />
                 <div class="error">
                   <div v-if="!$v.username.minLength">
@@ -36,13 +37,14 @@
               </div>
             </div>
             <div class="bottom-margin-input-lable">
-              <div class="b-auth-email__input-label">Имя</div>
+              <!-- <div class="b-auth-email__input-label">Имя</div> -->
               <div>
                 <input
                   v-model.trim="$v.name.$model"
                   id="name"
                   class="g-input__input"
                   type="text"
+                  placeholder="Имя"
                 />
                 <div class="error" v-if="$v.name.$error">
                   <div v-if="!$v.name.minLength">
@@ -56,13 +58,14 @@
               </div>
             </div>
             <div class="bottom-margin-input-lable">
-              <div class="b-auth-email__input-label">E-mail</div>
+              <!-- <div class="b-auth-email__input-label">E-mail</div> -->
               <div>
                 <input
                   v-model.trim="$v.email.$model"
                   id="email"
                   class="g-input__input"
                   type="text"
+                  placeholder="E-mail"
                 />
                 <div class="error" v-if="$v.email.$error">
                   <div v-if="!$v.email.email">
@@ -72,13 +75,14 @@
               </div>
             </div>
             <div class="bottom-margin-input-lable">
-              <div class="b-auth-email__input-label">Пароль</div>
+              <!-- <div class="b-auth-email__input-label">Пароль</div> -->
               <div>
                 <input
                   v-model.trim="$v.password.$model"
                   id="password"
                   class="g-input__input"
                   type="password"
+                  placeholder="Пароль"
                 />
                 <div class="error" v-if="$v.password.$error">
                   <div v-if="!$v.password.goodPassword">
@@ -123,8 +127,7 @@
 </template>
 
 <script>
-const { VUE_APP_SERVER_URL } = process.env
-import axios from "axios";
+import { registerUser } from "../API/register"
 // import axiosInstance from "../API/index"
 import {
   required,
@@ -137,10 +140,10 @@ export default {
   name: "registre",
   data() {
     return {
-      username: "",
-      name: "",
-      email: "",
-      password: "",
+      username: "SIUSWHY",
+      name: "Даниил",
+      email: "ventsodaniil@yandex.ru",
+      password: "123qweQWE",
       // isLoginModalVisible: false,
 
     };
@@ -176,18 +179,26 @@ export default {
   },
   methods: {
     async postUser() {
+      const response = await registerUser({
+        username: this.username,
+        name: this.name,
+        email: this.email,
+        password: this.password,
+      })
+      console.log(response)
+
       console.log(this.username, this.name, this.email, this.password);
       // axiosInstance.post('register', data);
-      await axios({
-        url: VUE_APP_SERVER_URL + '/register',
-        method: "post",
-        data: {
-          username: this.username,
-          name: this.name,
-          email: this.email,
-          password: this.password,
-        },
-      });
+      // await axios({
+      //   url: VUE_APP_SERVER_URL + '/register',
+      //   method: "post",
+      //   data: {
+      //     username: this.username,
+      //     name: this.name,
+      //     email: this.email,
+      //     password: this.password,
+      //   },
+      // });
     },
     close() {
       this.$emit("close");
@@ -279,8 +290,12 @@ export default {
   border-color: transparent;
   border-style: none;
   border-width: 0px;
+  color: white;
   border-bottom: 1px solid #ced4da;
   /* margin: 0px 0px -20px -110px; */
+}
+.g-input__input::placeholder {
+  color: white;
 }
 .bottom-margin-input-lable {
   margin-bottom: 35px;
