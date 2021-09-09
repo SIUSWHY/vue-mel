@@ -1,4 +1,5 @@
 const { VUE_APP_SERVER_URL } = process.env
+// const cookie = require('cookie')
 
 function setCookie(token) {
   document.cookies.set({
@@ -6,6 +7,7 @@ function setCookie(token) {
     cookieName: 'Token',
     value: token
   })
+  console.log(setCookie)
 }
 
 // 'Bearer ' + token
