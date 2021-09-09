@@ -188,17 +188,6 @@ export default {
       console.log(response)
 
       console.log(this.username, this.name, this.email, this.password);
-      // axiosInstance.post('register', data);
-      // await axios({
-      //   url: VUE_APP_SERVER_URL + '/register',
-      //   method: "post",
-      //   data: {
-      //     username: this.username,
-      //     name: this.name,
-      //     email: this.email,
-      //     password: this.password,
-      //   },
-      // });
     },
     close() {
       this.$emit("close");

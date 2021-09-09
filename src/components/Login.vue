@@ -71,8 +71,8 @@
 </template>
 
 <script>
-const { VUE_APP_SERVER_URL } = process.env
-import axios from "axios";
+import { authUser } from "../API/auth"
+
 import {
   required,
   email,
@@ -112,14 +112,11 @@ export default {
       this.isLoginModalVisible = true;
     },
     async loginUser() {
-      await axios({
-        url: VUE_APP_SERVER_URL + '/login',
-        method: "post",
-        data: {
-          email: this.email,
-          password: this.password,
-        },
+      const response = await authUser({
+        email: this.email,
+        password: this.password,
       })
+      console.log(response)
     },
   },
   components: {
