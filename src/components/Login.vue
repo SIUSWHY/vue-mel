@@ -73,6 +73,7 @@
 <script>
 import { authUser } from "../API/auth"
 
+
 import {
   required,
   email,
@@ -116,10 +117,10 @@ export default {
         email: this.email,
         password: this.password,
       })
-      console.log(response)
+      console.log(response.data);
+      this.$cookies.set("authToken", response.data)
     },
-  },
-  components: {
+
   },
 };
 </script>

@@ -9,8 +9,6 @@ const { cryptPassword } = require('./helpers/cryptPassword')
 var cors = require('cors')
 const { validation } = require('./helpers/validation')
 const { createToken } = require('./helpers/createToken')
-const { setCookie } = require('./helpers/setCookie')
-
 const loginController = require('./controllers/login')
 
 async function run() {
@@ -82,14 +80,16 @@ async function run() {
     //   name: name,
     //   email: email
     // })
-    const token = await createToken({})
-    const cookie = await setCookie(token)
-
+    const token = await createToken({
+      username: username,
+      name: name,
+      email: email
+    })
     console.log(newUser)
 
     // return res.status(500).send(error.message)
 
-    return res.send(token, cookie)
+    return res.send(token)
   })
 
   app.listen(port, () => console.log(`Example app listening on port ${port}!`))

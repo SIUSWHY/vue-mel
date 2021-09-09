@@ -186,8 +186,8 @@ export default {
         password: this.password,
       })
       console.log(response)
-
       console.log(this.username, this.name, this.email, this.password);
+      // this.$cookies.set("registreToken", response.data)
     },
     close() {
       this.$emit("close");

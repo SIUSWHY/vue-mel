@@ -1,6 +1,12 @@
 import Vue from 'vue'
 import Vuelidate from 'vuelidate'
+import VueCookies from 'vue-cookies'
+
 Vue.use(Vuelidate)
+Vue.use(VueCookies)
+
+Vue.$cookies.config('7d')
+
 import App from './App.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
