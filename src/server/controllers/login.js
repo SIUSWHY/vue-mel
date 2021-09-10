@@ -18,7 +18,9 @@ const loginContoller = async (req, res) => {
     }
 
     const token = createToken({
-      email: user.email
+      email: user.email,
+      username: user.username,
+      name: user.name
     })
     return res.send(token)
   } catch (error) {
