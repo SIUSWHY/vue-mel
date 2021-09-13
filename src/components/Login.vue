@@ -109,9 +109,6 @@ export default {
     close() {
       this.$emit("close");
     },
-    showModal() {
-      this.isLoginModalVisible = true;
-    },
     async loginUser() {
       const response = await authUser({
         email: this.email,

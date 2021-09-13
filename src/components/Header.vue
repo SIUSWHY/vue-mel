@@ -15,10 +15,14 @@
           <input class="search-b" type="text" placeholder="  Ищите статью?" />
           <font-awesome-icon icon="search" />
         </div>
-        <a class="type-list-right-menu" href=""
+        <a class="type-list-right-menu" @click="showCreateCardModal"
           >НАПИСАТЬ В БЛОГ
           <font-awesome-icon icon="pencil-alt" />
         </a>
+        <createCardModal
+          v-show="isCreateCardVisible"
+          @close="closeCreateCardModal"
+        />
         <button class="si-up_b-style" type="button" @click="showModal">
           Sing Up
         </button>
@@ -36,17 +40,19 @@
 <script>
 import Modal from "@/components/Registre.vue";
 import Login from "@/components/Login.vue";
-
+import CreateCardModal from "@/components/Createcard.vue"
 export default {
   name: "Header",
   components: {
     Modal,
     Login,
+    CreateCardModal,
   },
   data() {
     return {
       isModalVisible: false,
       isLoginModalVisible: false,
+      isCreateCardVisible: false,
     };
   },
   methods: {
@@ -61,6 +67,12 @@ export default {
     },
     closeLoginModal() {
       this.isLoginModalVisible = false;
+    },
+    showCreateCardModal() {
+      this.isCreateCardVisible = true;
+    },
+    closeCreateCardModal() {
+      this.isCreateCardVisible = false;
     },
   },
 };
@@ -87,6 +99,7 @@ export default {
   display: flex;
 }
 .type-list-right-menu {
+  cursor: pointer;
   text-align: center;
   margin: 23px 10px;
   height: auto;
