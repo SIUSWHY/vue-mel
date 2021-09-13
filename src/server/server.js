@@ -89,7 +89,7 @@ async function run() {
 
     // return res.status(500).send(error.message)
 
-    return res.send(token)
+    return res.send('Bearer' + token)
   })
 
   app.listen(port, () => console.log(`Example app listening on port ${port}!`))
