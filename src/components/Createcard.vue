@@ -41,8 +41,8 @@ export default {
   name: "createModalCard",
   data() {
     return {
-      category: "",
-      title: "",
+      category: "ВОПРОС-ОТВЕТ",
+      title: "Как организовать раздельный сбор мусора в школе?",
     }
   },
   methods: {
