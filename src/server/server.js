@@ -10,6 +10,7 @@ var cors = require('cors')
 const { validation } = require('./helpers/validation')
 const { createToken } = require('./helpers/createToken')
 const loginController = require('./controllers/login')
+const { verifyToken } = require('./helpers/verifyToken')
 
 async function run() {
   const app = express()
@@ -28,7 +29,7 @@ async function run() {
   app.get('/', (req, res) => res.send('Hello World!'))
 
   //get cards
-  app.get('/cards', async (req, res) => {
+  app.get('/cards', verifyToken, async (req, res) => {
     const cards = await Cards.find()
     if (req.query.sort) {
       const key = req.query.sort
@@ -89,7 +90,7 @@ async function run() {
 
     // return res.status(500).send(error.message)
 
-    return res.send('Bearer' + token)
+    return res.send(token)
   })
 
   app.listen(port, () => console.log(`Example app listening on port ${port}!`))
