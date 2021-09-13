@@ -24,9 +24,12 @@ const loginContoller = async (req, res) => {
     })
     return res.send(token)
   } catch (error) {
-    return res.status(500).send({
-      errors: [error.message]
-    })
+    return (
+      res.status(500).send({
+        errors: [error.message]
+      }),
+      alert('Неправильно введен логин или пароль')
+    )
   }
 }
 

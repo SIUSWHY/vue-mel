@@ -16,3 +16,10 @@ axios.interceptors.request.use(
     return Promise.reject(error)
   }
 )
+
+axios.interceptors.response.use(null, (error) => {
+  // eslint-disable-next-line no-debugger
+  // debugger
+  alert(error.response?.data?.errors[0])
+  return Promise.reject(error)
+})
