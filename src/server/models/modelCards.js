@@ -4,8 +4,14 @@ const CardsSchema = mongoose.Schema({
   title: String,
   text: String,
   img: String,
-  viewCount: Number,
-  commentCount: Number,
+  viewCount: {
+    type: Number,
+    default: 0
+  },
+  commentCount: {
+    type: Number,
+    default: 0
+  },
   newDate: String
 })
 

@@ -10,11 +10,11 @@
             </div>
             <div>
               <div>Категория статьи</div>
-              <input type="text" v-model="category" />
+              <input type="text" v-model="title" />
             </div>
             <div>
-              <div>Заголовок статьи</div>
-              <input type="text" v-model="title" />
+              <div>Текст статьи</div>
+              <input type="text" v-model="text" />
             </div>
           </div>
 
@@ -44,15 +44,16 @@ export default {
   name: "createModalCard",
   data() {
     return {
-      category: "ВОПРОС-ОТВЕТ",
-      title: "Как организовать раздельный сбор мусора в школе?",
+      title: "ВОПРОС-ОТВЕТ",
+      text: "Как организовать раздельный сбор мусора в школе?",
     };
   },
   methods: {
     postNews() {
       const response = sendCard({
-        category: this.category,
         title: this.title,
+        text: this.text,
+        img: this.img,
       })
       console.log(response)
     },

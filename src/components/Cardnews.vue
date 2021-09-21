@@ -1,7 +1,11 @@
 <template>
   <div id="cards_data">
     <div class="cards_size">
-      <img class="size_pic" :src="require('@/assets/' + card_news.img)" />
+      <img
+        v-if="card_news.img"
+        class="size_pic"
+        :src="require('@/assets/' + card_news.img)"
+      />
       <div class="block_card_style">
         <div class="content-title">{{ card_news.title }}</div>
         <div class="content-text">

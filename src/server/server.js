@@ -28,7 +28,17 @@ async function run() {
   // REST
   app.get('/', (req, res) => res.send('Hello World!'))
 
-  app.post('/cards')
+  app.post('/card', verifyToken, async (req, res, next) => {
+    const title = req.body.title
+    const text = req.body.text
+
+    const newCard = new Cards({
+      title: title,
+      text: text
+    })
+    newCard.save()
+    return res.send(newCard)
+  })
 
   //get cards
   app.get('/cards', verifyToken, async (req, res) => {
@@ -84,6 +94,7 @@ async function run() {
     //   email: email
     // })
     const token = await createToken({
+      id: newUser._id,
       username: username,
       name: name,
       email: email

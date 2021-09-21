@@ -8,6 +8,9 @@ function verifyToken(req, res, next) {
 
     // verify a token symmetric - synchronous
     let decoded = jwt.verify(token, JWT_KEY)
+
+    req.user = decoded
+
     console.log(decoded) // bar
     next()
   } catch (error) {
