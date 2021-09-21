@@ -28,6 +28,8 @@ async function run() {
   // REST
   app.get('/', (req, res) => res.send('Hello World!'))
 
+  app.post('/cards')
+
   //get cards
   app.get('/cards', verifyToken, async (req, res) => {
     const cards = await Cards.find()

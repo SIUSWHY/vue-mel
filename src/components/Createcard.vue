@@ -4,17 +4,17 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="float_text">
-            <div>
+            <div action="/news" method="post" enctype="multipart/form-data">
               <div>Выберите изображение</div>
               <input type="file" accept="image/*" id="img" />
             </div>
             <div>
               <div>Категория статьи</div>
-              <input type="text" id="category" autocomplete="off" />
+              <input type="text" v-model="category" />
             </div>
             <div>
               <div>Заголовок статьи</div>
-              <input type="text" id="title" autocomplete="off" />
+              <input type="text" v-model="title" />
             </div>
           </div>
 
@@ -24,6 +24,7 @@
               @click="
                 () => {
                   close();
+                  postNews();
                 }
               "
             >
@@ -37,15 +38,24 @@
 </template>
 
 <script>
+import { sendCard } from "../API/sendcard"
+
 export default {
   name: "createModalCard",
   data() {
     return {
       category: "ВОПРОС-ОТВЕТ",
       title: "Как организовать раздельный сбор мусора в школе?",
-    }
+    };
   },
   methods: {
+    postNews() {
+      const response = sendCard({
+        category: this.category,
+        title: this.title,
+      })
+      console.log(response)
+    },
     close() {
       this.$emit("close");
     },
