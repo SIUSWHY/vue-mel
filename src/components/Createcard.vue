@@ -6,7 +6,14 @@
           <div class="float_text">
             <div action="/news" method="post" enctype="multipart/form-data">
               <div>Выберите изображение</div>
-              <input type="file" accept="image/*" id="img" />
+              <input
+                accept="image/*"
+                type="file"
+                id="files"
+                ref="files"
+                multiple
+                v-on:change="handleFileUploads()"
+              />
             </div>
             <div>
               <div>Категория статьи</div>
@@ -46,6 +53,7 @@ export default {
     return {
       title: "ВОПРОС-ОТВЕТ",
       text: "Как организовать раздельный сбор мусора в школе?",
+      files: '',
     };
   },
   methods: {
@@ -56,6 +64,9 @@ export default {
         img: this.img,
       })
       console.log(response)
+    },
+    handleFilesUpload() {
+      this.file = this.$refs.file.files[0];
     },
     close() {
       this.$emit("close");
