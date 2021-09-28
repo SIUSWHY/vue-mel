@@ -4,6 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const User = require('./models/modelUsers')
 const Cards = require('./models/modelCards')
+const path = require('path')
 const { cryptPassword } = require('./helpers/cryptPassword')
 
 var cors = require('cors')
@@ -11,6 +12,8 @@ const { validation } = require('./helpers/validation')
 const { createToken } = require('./helpers/createToken')
 const loginController = require('./controllers/login')
 const { verifyToken } = require('./helpers/verifyToken')
+const multer = require('multer')
+const upload = multer({ dest: 'src/assets/img/uploads/' })
 
 async function run() {
   const app = express()
@@ -20,6 +23,13 @@ async function run() {
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
 
+  app.use(
+    '/images',
+    express.static(path.join(__dirname, '..', 'assets/img/uploads'))
+  )
+
+  console.log('A', path.join(__dirname, '..', 'assets/img/uploads'))
+
   await mongoose.connect('mongodb://localhost:27017/mel', {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -28,17 +38,27 @@ async function run() {
   // REST
   app.get('/', (req, res) => res.send('Hello World!'))
 
-  app.post('/card', verifyToken, async (req, res, next) => {
-    const title = req.body.title
-    const text = req.body.text
+  app.post(
+    '/cards/upload',
+    verifyToken,
+    upload.single('img'),
+    async (req, res, next) => {
+      console.log('body', req.body)
+      console.log('file', req.file)
 
-    const newCard = new Cards({
-      title: title,
-      text: text
-    })
-    newCard.save()
-    return res.send(newCard)
-  })
+      const title = req.body.title
+      const text = req.body.text
+      // const img = req.body.img
+
+      const newCard = new Cards({
+        title: title,
+        text: text,
+        img: req.file.path
+      })
+      newCard.save()
+      return res.send(newCard)
+    }
+  )
 
   //get cards
   app.get('/cards', verifyToken, async (req, res) => {

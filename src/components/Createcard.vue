@@ -6,7 +6,14 @@
           <div class="float_text">
             <div action="/news" method="post" enctype="multipart/form-data">
               <div>Выберите изображение</div>
-              <input type="file" accept="image/*" id="img" />
+              <input
+                accept="image/*"
+                type="file"
+                id="img"
+                ref="img"
+                name="img"
+                v-on:change="handleFileUpload()"
+              />
             </div>
             <div>
               <div>Категория статьи</div>
@@ -23,6 +30,7 @@
               class="modal-default-button"
               @click="
                 () => {
+                  handleFileUpload();
                   close();
                   postNews();
                 }
@@ -46,15 +54,21 @@ export default {
     return {
       title: "ВОПРОС-ОТВЕТ",
       text: "Как организовать раздельный сбор мусора в школе?",
+      img: ''
     };
   },
   methods: {
-    postNews() {
-      const response = sendCard({
-        title: this.title,
-        text: this.text,
-        img: this.img,
-      })
+    handleFileUpload() {
+      this.img = this.$refs.img.files[0];
+      // console.log(this.$refs.img.files[0])
+    },
+    async postNews() {
+      const formData = new FormData();
+      formData.append('img', this.img);
+      formData.append('title', this.title);
+      formData.append('text', this.text);
+
+      const response = await sendCard(formData)
       console.log(response)
     },
     close() {
