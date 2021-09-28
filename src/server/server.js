@@ -27,8 +27,7 @@ async function run() {
     '/images',
     express.static(path.join(__dirname, '..', 'assets/img/uploads'))
   )
-
-  console.log('A', path.join(__dirname, '..', 'assets/img/uploads'))
+  // console.log('A', path.join(__dirname, '..', 'assets/img/uploads'))
 
   await mongoose.connect('mongodb://localhost:27017/mel', {
     useNewUrlParser: true,

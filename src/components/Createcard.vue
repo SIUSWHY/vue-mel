@@ -71,6 +71,9 @@ export default {
       const response = await sendCard(formData)
       console.log(response)
     },
+    handleFilesUpload() {
+      this.file = this.$refs.file.files[0];
+    },
     close() {
       this.$emit("close");
     },
