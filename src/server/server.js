@@ -25,7 +25,7 @@ async function run() {
 
   app.use(
     '/images',
-    express.static(path.join(__dirname, '..', 'assets/img/uploads'))
+    express.static(path.join(__dirname, '..', 'assets/img/uploads' + '.png'))
   )
   // console.log('A', path.join(__dirname, '..', 'assets/img/uploads'))
 
@@ -52,7 +52,7 @@ async function run() {
       const newCard = new Cards({
         title: title,
         text: text,
-        img: req.file.path
+        img: req.file.path + '.png'
       })
       newCard.save()
       return res.send(newCard)

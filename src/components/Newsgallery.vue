@@ -34,5 +34,6 @@ export default {
 
 .cardnews_container_style {
   background-color: #f2f2f2;
+  padding-top: 60px;
 }
 </style>

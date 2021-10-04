@@ -60,11 +60,11 @@ export default {
   methods: {
     handleFileUpload() {
       this.img = this.$refs.img.files[0];
-      // console.log(this.$refs.img.files[0])
+      console.log(this.$refs.img.files[0])
     },
     async postNews() {
       const formData = new FormData();
-      formData.append('img', this.img);
+      formData.append('img', this.img,);
       formData.append('title', this.title);
       formData.append('text', this.text);
 

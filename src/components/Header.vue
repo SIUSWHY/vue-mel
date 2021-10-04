@@ -120,6 +120,8 @@ export default {
 .back-g_headr_menu {
   background-color: #212121;
   color: white;
+  position: fixed;
+  width: 100%;
   height: 62px;
 }
 .r-nav-b_position {
