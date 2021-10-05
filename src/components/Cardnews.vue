@@ -2,7 +2,7 @@
   <div id="cards_data">
     <div class="cards_size">
       <div style="height: 220px">
-        <!-- <img class="size_pic" :src="require('@/assets/' + card_news.img)" /> -->
+        <img class="size_pic" :src="require('@/assets/' + card_news.img)" />
       </div>
       <div class="block_card_style">
         <div class="content-title">{{ card_news.title }}</div>

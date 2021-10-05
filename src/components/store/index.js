@@ -17,6 +17,9 @@ const store = new Vuex.Store({
   mutations: {
     getPosts(state, posts) {
       state.posts = posts
+    },
+    ADD_NEW_NEWSCARD: (state, data) => {
+      state.posts.push(data)
     }
   }
 })

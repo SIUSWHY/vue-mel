@@ -11,7 +11,7 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     config.headers.Authorization = 'Bearer ' + Vue.$cookies.get('authToken')
-    console.log(config)
+    // console.log(config)
     return config
   },
   (error) => {

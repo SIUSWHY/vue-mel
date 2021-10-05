@@ -31,6 +31,7 @@
               @click="
                 () => {
                   handleFileUpload();
+                  addNewsCard();
                   close();
                   postNews();
                 }
@@ -46,7 +47,10 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex';
 import { sendCard } from "../API/sendcard"
+// import store from './store';
+// store
 
 export default {
   name: "createModalCard",
@@ -57,12 +61,26 @@ export default {
       img: ''
     };
   },
+  computed: {
+    ...mapState([
+      'posts'
+    ])
+  },
   methods: {
+
+    ...mapMutations([
+      'ADD_NEW_NEWSCARD'
+    ]),
+    addNewsCard() {
+
+    },
+
     handleFileUpload() {
       this.img = this.$refs.img.files[0];
+      // eslint-disable-next-line no-unused-vars
       const filytype = this.$refs.img.files[0].name.split(".").pop()
-      console.log(this.$refs.img.files[0])
-      console.log(filytype)
+      // console.log(this.$refs.img.files[0])
+      // console.log(filytype)
     },
     async postNews() {
       const formData = new FormData();
@@ -71,6 +89,9 @@ export default {
       formData.append('text', this.text);
 
       const response = await sendCard(formData)
+
+      this.ADD_NEW_NEWSCARD(response.data)
+
       console.log(response)
     },
     close() {
