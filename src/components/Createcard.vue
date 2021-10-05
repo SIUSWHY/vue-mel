@@ -31,7 +31,6 @@
               @click="
                 () => {
                   handleFileUpload();
-                  addNewsCard();
                   close();
                   postNews();
                 }
@@ -67,14 +66,9 @@ export default {
     ])
   },
   methods: {
-
     ...mapMutations([
       'ADD_NEW_NEWSCARD'
     ]),
-    addNewsCard() {
-
-    },
-
     handleFileUpload() {
       this.img = this.$refs.img.files[0];
       // eslint-disable-next-line no-unused-vars
