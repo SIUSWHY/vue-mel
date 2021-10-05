@@ -25,7 +25,7 @@ async function run() {
 
   app.use(
     '/images',
-    express.static(path.join(__dirname, '..', 'assets/img/uploads' + '.png'))
+    express.static(path.join(__dirname, '..', 'assets/img/uploads'))
   )
   // console.log('A', path.join(__dirname, '..', 'assets/img/uploads'))
 

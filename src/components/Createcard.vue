@@ -60,7 +60,9 @@ export default {
   methods: {
     handleFileUpload() {
       this.img = this.$refs.img.files[0];
+      const filytype = this.$refs.img.files[0].name.split(".").pop()
       console.log(this.$refs.img.files[0])
+      console.log(filytype)
     },
     async postNews() {
       const formData = new FormData();
@@ -70,9 +72,6 @@ export default {
 
       const response = await sendCard(formData)
       console.log(response)
-    },
-    handleFilesUpload() {
-      this.file = this.$refs.file.files[0];
     },
     close() {
       this.$emit("close");
