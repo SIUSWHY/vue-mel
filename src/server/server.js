@@ -52,7 +52,7 @@ async function run() {
       const newCard = new Cards({
         title: title,
         text: text,
-        img: req.file.path + '.png'
+        img: req.file.filename + '.png'
       })
       newCard.save()
       return res.send(newCard)

@@ -2,10 +2,7 @@
   <div id="cards_data">
     <div class="cards_size">
       <div style="height: 220px">
-        <img
-          class="size_pic"
-          src="http://192.168.88.101:3000/images/8aec02cbf63d3bae2dc893a67d359ba9.png"
-        />
+        <img class="size_pic" :src="require('@/assets/' + card_news.img)" />
       </div>
       <div class="block_card_style">
         <div class="content-title">{{ card_news.title }}</div>
@@ -29,9 +26,21 @@
 </template>
 
 <script>
+// import { createImageUrl } from "../server/helpers/joinImageUrl.js"
+// import { IMAGES_STORE } from process.env
+
+// const { IMAGES_STORE } = process.env
+
 export default {
   name: "Cardnews",
   props: ["card_news"],
+  methods: {
+    // createImageUrl(card_news) {
+    //   const url = 'http://192.168.88.101:3000/images/' + (card_news.img)
+    //   console.log(url)
+    // }
+  },
+
 
   updated() {
     // console.log(this.card_news);

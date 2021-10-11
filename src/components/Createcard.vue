@@ -48,8 +48,6 @@
 <script>
 import { mapMutations, mapState } from 'vuex';
 import { sendCard } from "../API/sendcard"
-// import store from './store';
-// store
 
 export default {
   name: "createModalCard",
@@ -73,7 +71,7 @@ export default {
       this.img = this.$refs.img.files[0];
       // eslint-disable-next-line no-unused-vars
       const filytype = this.$refs.img.files[0].name.split(".").pop()
-      // console.log(this.$refs.img.files[0])
+      // console.log(this.img)
       // console.log(filytype)
     },
     async postNews() {
